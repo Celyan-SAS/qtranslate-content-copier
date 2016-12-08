@@ -27,7 +27,13 @@ class wpqTCC {
 	 *
 	*/
 	public function addBulkActionInFooter() {
-		var_dump( get_current_screen() );
+		
+		if( !$screen = get_current_screen() )
+			return;
+		
+		if( empty( $screen->base ) || 'edit' != $screen->base )
+			return;
+		
 		?>
 		<script>
 		(function($) {
