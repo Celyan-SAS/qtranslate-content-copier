@@ -83,10 +83,10 @@ class wpqTCC {
 					continue;
 				}
 				echo $lang . ' to copy.<br/>';
-				$content = str_replace( '[:]', '[:' . $lang . ']' . $content );
+				$content = str_replace( '[:]', '[:' . $lang . ']' . $content, $content );
 			}
 			
-			if( $orig_content != $content ) {
+			if( $content && $orig_content != $content ) {
 				$post->post_content = $content;
 				wp_update_post( $post );
 			}
