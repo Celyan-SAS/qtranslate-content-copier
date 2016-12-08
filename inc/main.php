@@ -57,15 +57,23 @@ class wpqTCC {
 		if( !isset($_REQUEST['id']) || !$_REQUEST['id'] || !is_array($_REQUEST['id']) )
 			return;
 
+		$langs = qtrans_getSortedLanguages();
 		$post_ids = $_REQUEST['id'];
 		
-		echo '<div class="update"><p><strong>wpqtcc</strong></p>';
+		echo '<div class="updated"><p><strong>wpqtcc</strong></p>';
 		echo '<ul>';									//debug
 		foreach( $post_ids as $post_id ) {
 			echo '<li>Post id: ' . $post_id . '</li>';	//debug
+			
+			$post = get_post( $post_id );
+			$content = $post->post_content;
+			
+			foreach( $langs as $lang )
+				echo ' ' . $lang . ' ';
+			
 		}
 		echo '</ul>';									//debug
-		echo '</div>';											//debug
+		echo '</div>';
 	}
 }
 ?>
