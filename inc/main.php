@@ -95,8 +95,10 @@ class wpqTCC {
 				}
 				
 				$stripped = $content;
-				if( preg_match( '/\[:fr\](.+?)\[:([a-z]{2})?\]/', $content, $matches ) )
+				if( preg_match( '/\[:fr\](.+?)\[:([a-z]{2})?\]/', $content, $matches ) ) {
 					$stripped = $matches[1];
+					echo 'stripped ok.<br/>';
+				}
 				$content = str_replace( '[:]', '[:' . $lang . ']' . $stripped . '[:]', $content );
 			}
 			
