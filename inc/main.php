@@ -75,7 +75,7 @@ class wpqTCC {
 			echo '<li>Post id: ' . $post_id . '</li>';	//debug
 			
 			$post = get_post( $post_id );
-			$content = $post->post_content;
+			$orig_content = $content = $post->post_content;
 			
 			foreach( $langs as $lang ) {
 				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
@@ -83,6 +83,12 @@ class wpqTCC {
 					continue;
 				}
 				echo $lang . ' to copy.<br/>';
+				$content = str_replace( '[:]', '[:' . $lang . ']' . $content );
+			}
+			
+			if( $orig_content != $content ) {
+				$post->post_content = $content;
+				wp_update_post( $post );
 			}
 		}
 		echo '</ul>';									//debug
