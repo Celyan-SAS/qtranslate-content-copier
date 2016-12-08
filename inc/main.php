@@ -68,9 +68,13 @@ class wpqTCC {
 			$post = get_post( $post_id );
 			$content = $post->post_content;
 			
-			foreach( $langs as $lang )
-				echo ' ' . $lang . ' ';
-			
+			foreach( $langs as $lang ) {
+				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
+					echo $lang . ' already there.<br/>';
+					continue;
+				}
+				echo $lang . ' to copy.<br/>';
+			}
 		}
 		echo '</ul>';									//debug
 		echo '</div>';
