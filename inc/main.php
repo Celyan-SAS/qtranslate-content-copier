@@ -53,8 +53,19 @@ class wpqTCC {
 	 * 
 	 */
 	public function wpqtcc_dupe_action() {
-		var_dump( $_POST );	//debug
-		die();				//debug
+
+		if( !isset($_REQUEST['id']) || !$_REQUEST['id'] || !is_array($_REQUEST['id']) )
+			return;
+
+		$post_ids = $_REQUEST['id'];
+		
+		echo '<div class="update"><p><strong>wpqtcc</strong></p>';
+		echo '<ul>';									//debug
+		foreach( $post_ids as $post_id ) {
+			echo '<li>Post id: ' . $post_id . '</li>';	//debug
+		}
+		echo '</ul>';									//debug
+		echo '</div>';											//debug
 	}
 }
 ?>
