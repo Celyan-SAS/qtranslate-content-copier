@@ -54,11 +54,11 @@ class wpqTCC {
 	 */
 	public function wpqtcc_dupe_action() {
 
-		if( !isset($_REQUEST['id']) || !$_REQUEST['id'] || !is_array($_REQUEST['id']) )
+		if( !isset($_REQUEST['post']) || !$_REQUEST['post'] || !is_array($_REQUEST['post']) )
 			return;
 
 		$langs = qtrans_getSortedLanguages();
-		$post_ids = $_REQUEST['id'];
+		$post_ids = $_REQUEST['post'];
 		
 		echo '<div class="updated"><p><strong>wpqtcc</strong></p>';
 		echo '<ul>';									//debug
