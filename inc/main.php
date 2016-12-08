@@ -69,7 +69,7 @@ class wpqTCC {
 		$langs = qtrans_getSortedLanguages();
 		$post_ids = $_REQUEST['post'];
 		
-		echo '<div class="notice notice-success is-dismissible updated"><p><strong>wpqtcc</strong></p>';
+		echo '<div class="notice notice-warning updated"><p><strong>wpqtcc</strong></p>';
 		echo '<ul>';									//debug
 		foreach( $post_ids as $post_id ) {
 			echo '<li>Post id: ' . $post_id . '</li>';	//debug
