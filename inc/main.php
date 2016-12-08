@@ -87,7 +87,7 @@ class wpqTCC {
 		}
 		echo '</ul>';									//debug
 		echo '</div>';
-		//die();											//debug
+		die();											//debug
 	}
 }
 ?>
