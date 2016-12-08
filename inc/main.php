@@ -27,6 +27,7 @@ class wpqTCC {
 	 *
 	*/
 	public function addBulkActionInFooter() {
+		var_dump( get_current_screen() );
 		?>
 		<script>
 		(function($) {
