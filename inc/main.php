@@ -87,6 +87,7 @@ class wpqTCC {
 			}
 			
 			if( $content && $orig_content != $content ) {
+				echo 'updating post<br/>';
 				$post->post_content = $content;
 				wp_update_post( $post );
 			}
