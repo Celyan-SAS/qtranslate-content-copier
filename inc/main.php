@@ -68,49 +68,60 @@ class wpqTCC {
 
 		$langs = qtrans_getSortedLanguages();
 		$post_ids = $_REQUEST['post'];
+		$error = false;
 		
-		echo '<div class="notice notice-warning updated"><p><strong>wpqtcc</strong></p>';
-		echo '<ul>';									//debug
+		//echo '<div class="notice notice-warning updated"><p><strong>wpqtcc</strong></p>';
+		//echo '<ul>';									//debug
 		foreach( $post_ids as $post_id ) {
-			echo '<li>Post id: ' . $post_id . '</li>';	//debug
+			//echo '<li>Post id: ' . $post_id . '</li>';	//debug
 			
 			$post = get_post( $post_id );
 			$orig_content = $content = $post->post_content;
 			
 			if( !preg_match( '/\[\:([a-z]{2})?\]/', $content ) ) {
-				echo 'Les langues ne sont pas définies.</br>';
+				//echo 'Les langues ne sont pas définies.</br>';
 				$content = '[:fr]' . $content . '[:]';
 			}
 				
 			foreach( $langs as $lang ) {
 				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
-					echo $lang . ' already there.<br/>';
+					//echo $lang . ' already there.<br/>';
 					continue;
 				}
-				echo $lang . ' to copy.<br/>';
+				//echo $lang . ' to copy.<br/>';
 				
 				if( false === strpos( $content, '[:fr]' ) ) {
-					echo 'Il n\'y a pas le français->continue.';
+					echo 'Erreur sur post id: ' . $post_id . '<brt/>';
+					echo 'Il n\'y a pas le contenu français.<br/>';
+					$error = true;
 					continue;
 				}
 				
 				$stripped = $content;
 				if( preg_match( '/\[\:fr\](.+?)\[\:([a-z]{2})?\]/ms', $content, $matches ) ) {
 					$stripped = $matches[1];
-					echo 'stripped ok.<br/>';
+					//echo 'stripped ok.<br/>';
+					$content = str_replace( '[:]', '[:' . $lang . ']' . $stripped . '[:]', $content );
+				} else {
+					echo 'Erreur sur post id: ' . $post_id . '<brt/>';
+					echo 'Le contenu n\'a pas pu être extrait.<br/>';
+					$error = true;
+					continue;
 				}
-				$content = str_replace( '[:]', '[:' . $lang . ']' . $stripped . '[:]', $content );
+				
 			}
 			
 			if( $content && $orig_content != $content ) {
-				echo 'updating post<br/>';
+				//echo 'updating post<br/>';
 				$post->post_content = $content;
 				wp_update_post( $post );
 			}
 		}
-		echo '</ul>';									//debug
-		echo '</div>';
-		die();											//debug
+		//echo '</ul>';									//debug
+		//echo '</div>';
+		
+		if( $error )
+			die();										//debug
 	}
 }
 ?>
