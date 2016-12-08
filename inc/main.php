@@ -18,14 +18,16 @@ class wpqTCC {
 		 * Add bulk action to copy content over in all languages
 		 *
 		 */
-		add_action( 'admin_footer', array( $this, 'addBulkActionInFooter' ) );		
+		add_action( 'admin_footer', array( $this, 'addBulkActionInFooter' ) );
+		add_action( 'load-edit.php', array( $this, 'wpqtcc_dupe_action' ) );
+		
 	}
 	
 	/**
 	 * Adds a new bulk action to the WP content list screens
 	 * To copy content over in all qTranslate languages
 	 *
-	*/
+	 */
 	public function addBulkActionInFooter() {
 		
 		if( !$screen = get_current_screen() )
@@ -44,6 +46,14 @@ class wpqTCC {
 		})( jQuery );
 		</script>
 		<?php 
+	}
+	
+	/**
+	 * Performs the bulk content copy action
+	 * 
+	 */
+	public function wpqtcc_dupe_action() {
+		var_dump( $_POST );
 	}
 }
 ?>
