@@ -19,8 +19,8 @@ class wpqTCC {
 		 *
 		 */
 		add_action( 'admin_footer', array( $this, 'addBulkActionInFooter' ) );
-		//add_action( 'admin_notices', array( $this, 'wpqtcc_dupe_action' ) );
-		add_action( 'load-edit.php', array( $this, 'wpqtcc_dupe_action' ) );
+		add_action( 'admin_notices', array( $this, 'wpqtcc_dupe_action' ) );
+		//add_action( 'load-edit.php', array( $this, 'wpqtcc_dupe_action' ) );
 		
 	}
 	
