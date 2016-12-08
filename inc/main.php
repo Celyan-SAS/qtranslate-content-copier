@@ -55,11 +55,13 @@ class wpqTCC {
 	 */
 	public function wpqtcc_dupe_action() {
 
+		/*
 		if( !$screen = get_current_screen() )
 			return;
 		
 		if( empty( $screen->base ) || 'edit' != $screen->base )
 			return;
+		*/
 
 		if( !isset($_REQUEST['post']) || !$_REQUEST['post'] || !is_array($_REQUEST['post']) )
 			return;
