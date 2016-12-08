@@ -77,7 +77,7 @@ class wpqTCC {
 			$post = get_post( $post_id );
 			$orig_content = $content = $post->post_content;
 			
-			if( !preg_match( '/\[:.{2}?\]/', $content ) ) {
+			if( !preg_match( '/\[:[a-z]{2}?\]/', $content ) ) {
 				echo 'Les langues ne sont pas définies.</br>';
 				$content = '[:fr]' . $content . '[:]';
 			}
@@ -95,7 +95,7 @@ class wpqTCC {
 				}
 				
 				$stripped = $content;
-				if( preg_match( '/\[:fr\](.*?)\[:.{2}?\]/', $content, $matches ) )
+				if( preg_match( '/\[:fr\](.+?)\[:[a-z]{2}?\]/', $content, $matches ) )
 					$stripped = $matches[1];
 				$content = str_replace( '[:]', '[:' . $lang . ']' . $stripped . '[:]', $content );
 			}
