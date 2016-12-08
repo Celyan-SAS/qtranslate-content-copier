@@ -53,7 +53,8 @@ class wpqTCC {
 	 * 
 	 */
 	public function wpqtcc_dupe_action() {
-		var_dump( $_POST );
+		var_dump( $_POST );	//debug
+		die();				//debug
 	}
 }
 ?>
