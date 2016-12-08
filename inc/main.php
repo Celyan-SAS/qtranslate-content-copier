@@ -77,13 +77,27 @@ class wpqTCC {
 			$post = get_post( $post_id );
 			$orig_content = $content = $post->post_content;
 			
+			if( !preg_match( '/\[:.{2}?\]/', $content ) ) {
+				echo 'Les langues ne sont pas définies.</br>';
+				$content = '[:fr]' . $content . '[:]';
+			}
+				
 			foreach( $langs as $lang ) {
 				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
 					echo $lang . ' already there.<br/>';
 					continue;
 				}
 				echo $lang . ' to copy.<br/>';
-				$content = str_replace( '[:]', '[:' . $lang . ']' . $content, $content );
+				
+				if( false === strpos( '[:fr]', $content ) ) {
+					echo 'Il n\'y a pas le français->continue.';
+					continue;
+				}
+				
+				$stripped = $content;
+				if( preg_match( '/\[:fr\](.*?)\[:.{2}?\]/', $content, $matches ) )
+					$stripped = $matches[1];
+				$content = str_replace( '[:]', '[:' . $lang . ']' . $stripped . '[:]', $content );
 			}
 			
 			if( $content && $orig_content != $content ) {
