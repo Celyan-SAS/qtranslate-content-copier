@@ -89,7 +89,7 @@ class wpqTCC {
 				}
 				echo $lang . ' to copy.<br/>';
 				
-				if( false === strpos( '[:fr]', $content ) ) {
+				if( false === strpos( $content, '[:fr]' ) ) {
 					echo 'Il n\'y a pas le français->continue.';
 					continue;
 				}
