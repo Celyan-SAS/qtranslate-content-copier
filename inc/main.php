@@ -22,6 +22,9 @@ class wpqTCC {
 		//add_action( 'admin_notices', array( $this, 'wpqtcc_dupe_action' ) );
 		add_action( 'load-edit.php', array( $this, 'wpqtcc_dupe_action' ) );
 		
+		/** Load i18n **/
+		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
+		
 	}
 	
 	/**
@@ -153,6 +156,14 @@ class wpqTCC {
 		
 		if( $error )
 			die();										//debug
+	}
+	
+	/**
+	 * Load the text translation files
+	 *
+	 */
+	public function load_plugin_textdomain() {
+		load_plugin_textdomain( 'wpqtcc', false, plugin_basename( dirname( dirname( __FILE__ ) ) ) . '/languages' );
 	}
 }
 ?>
