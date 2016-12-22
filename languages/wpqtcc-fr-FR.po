@@ -1,9 +1,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: qTranslate Content Copier WP Plugin Text\n"
+"Project-Id-Version: wpqtcc qTranslate Content Copier WP Plugin Text\n"
 "POT-Creation-Date: 2016-03-15 10:00+0000\n"
-"PO-Revision-Date: 2016-12-22 12:56+0100\n"
+"PO-Revision-Date: 2016-12-22 13:00+0100\n"
 "Last-Translator: Yann Dubois <yann@abc.fr>\n"
 "Language-Team: Y.Dubois <yann@abc.fr>\n"
 "MIME-Version: 1.0\n"
