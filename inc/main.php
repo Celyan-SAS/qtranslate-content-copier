@@ -50,7 +50,7 @@ class wpqTCC {
 				$('<option>').val('wpqtcc_ovrw').text('<?php _e( 'Overwrite in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action']");
 				$('<option>').val('wpqtcc_ovrw').text('<?php _e( 'Overwrite in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action2']");
 
-				$('<option>').val('test').text('<?php echo 'lang: ' . get_locale(); ?>').appendTo("select[name='action']");
+				//$('<option>').val('test').text('<?php echo 'lang: ' . get_locale(); ?>').appendTo("select[name='action']");
 			});
 		})( jQuery );
 		</script>
