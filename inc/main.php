@@ -164,7 +164,7 @@ class wpqTCC {
 	 *
 	 */
 	public function load_plugin_textdomain() {
-		load_plugin_textdomain( 'wpqtcc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'wpqtcc', false, dirname( plugin_basename( dirname( __FILE__ ) ) ) . '/languages' );
 		//echo dirname( plugin_basename( dirname( __FILE__ ) ) ) . '/languages'; exit;	
 	}
 }
