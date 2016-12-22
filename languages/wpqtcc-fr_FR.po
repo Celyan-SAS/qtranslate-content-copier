@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wpqtcc qTranslate Content Copier WP Plugin Text\n"
 "POT-Creation-Date: 2016-03-15 10:00+0000\n"
-"PO-Revision-Date: 2016-12-22 13:02+0100\n"
+"PO-Revision-Date: 2016-12-22 13:11+0100\n"
 "Last-Translator: Yann Dubois <yann@abc.fr>\n"
 "Language-Team: Y.Dubois <yann@abc.fr>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 
 #: inc/main.inc.php:44
 msgid "Copy in all languages"
-msgstr "Copier sans écraser"
+msgstr "Copier dans toutes les langues sans écraser"
 
 #: inc/main.inc.php:47
 msgid "Overwrite in all languages"
-msgstr "Copier en écrasant"
+msgstr "Copier dans toutes les langues en écrasant"
