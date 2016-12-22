@@ -23,7 +23,7 @@ class wpqTCC {
 		add_action( 'load-edit.php', array( $this, 'wpqtcc_dupe_action' ) );
 		
 		/** Load i18n **/
-		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
+		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		
 	}
 	
@@ -164,7 +164,7 @@ class wpqTCC {
 	 */
 	public function load_plugin_textdomain() {
 		load_plugin_textdomain( 'wpqtcc', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-		echo dirname( plugin_basename( dirname( __FILE__ ) ) ) . '/languages'; exit;	
+		//echo dirname( plugin_basename( dirname( __FILE__ ) ) ) . '/languages'; exit;	
 	}
 }
 ?>
