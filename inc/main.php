@@ -121,6 +121,9 @@ class wpqTCC {
 						var_dump( $matches );
 						exit;
 						*/
+					} else {
+						/* fr */
+						continue;
 					}
 				}
 				//echo $lang . ' to copy.<br/>';
