@@ -109,7 +109,7 @@ class wpqTCC {
 						continue;
 					} else {
 						/** Overwrite **/
-						$content = preg_replace( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/', '\\2', $content );
+						$content = preg_replace( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/ms', '\\2', $content );
 						
 						/*DEBUG:
 						preg_match( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/ms', $content, $matches );
