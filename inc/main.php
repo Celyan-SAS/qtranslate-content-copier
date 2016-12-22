@@ -43,6 +43,10 @@ class wpqTCC {
 			$(document).ready(function() {
 				$('<option>').val('wpqtcc_dupe').text('<?php _e( 'Copy in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action']");
 				$('<option>').val('wpqtcc_dupe').text('<?php _e( 'Copy in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action2']");
+
+				$('<option>').val('wpqtcc_ovrw').text('<?php _e( 'Overwrite in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action']");
+				$('<option>').val('wpqtcc_ovrw').text('<?php _e( 'Overwrite in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action2']");
+				
 			});
 		})( jQuery );
 		</script>
@@ -55,13 +59,27 @@ class wpqTCC {
 	 */
 	public function wpqtcc_dupe_action() {
 
-		/*
+		if( !isset($_REQUEST['action']) && !isset($_REQUEST['action2']) )
+			return;
+		
+		$action = false;
+		
+		if( 'wpqtcc_dupe' == $_REQUEST['action'] || 'wpqtcc_dupe' == $_REQUEST['action2'] )
+			$action = 'copy';
+		
+		if( 'wpqtcc_ovrw' == $_REQUEST['action'] || 'wpqtcc_ovrw' == $_REQUEST['action2'] )
+			$action = 'overwrite';
+		
+		if( !$action )
+			return;
+		
+		/**/
 		if( !$screen = get_current_screen() )
 			return;
 		
 		if( empty( $screen->base ) || 'edit' != $screen->base )
 			return;
-		*/
+		/**/
 
 		if( !isset($_REQUEST['post']) || !$_REQUEST['post'] || !is_array($_REQUEST['post']) )
 			return;
