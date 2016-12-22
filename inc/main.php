@@ -113,6 +113,7 @@ class wpqTCC {
 						
 						//DEBUG:
 						preg_match( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/', $content, $matches );
+						echo 'lang:' . $lang . "\n";
 						var_dump( $matches );
 						exit;
 					}
