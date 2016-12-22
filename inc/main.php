@@ -110,6 +110,11 @@ class wpqTCC {
 					} else {
 						/** Overwrite **/
 						$content = preg_replace( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/', '\\2', $content );
+						
+						//DEBUG:
+						preg_match( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/', $content, $matches );
+						var_dump( $matches );
+						exit;
 					}
 				}
 				//echo $lang . ' to copy.<br/>';
