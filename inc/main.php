@@ -103,8 +103,14 @@ class wpqTCC {
 				
 			foreach( $langs as $lang ) {
 				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
-					//echo $lang . ' already there.<br/>';
-					continue;
+
+					if( 'copy' == $action ) {
+						//echo $lang . ' already there.<br/>';
+						continue;
+					} else {
+						/** Overwrite **/
+						$content = preg_replace( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/', '\\2', $content );
+					}
 				}
 				//echo $lang . ' to copy.<br/>';
 				
