@@ -107,7 +107,7 @@ class wpqTCC {
 					if( 'copy' == $action ) {
 						//echo $lang . ' already there.<br/>';
 						continue;
-					} else {
+					} elseif( 'fr' != $lang ) {
 						/** Overwrite **/
 						$content = preg_replace( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/ms', '\\2', $content );
 						
