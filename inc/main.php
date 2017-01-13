@@ -50,6 +50,13 @@ class wpqTCC {
 				$('<option>').val('wpqtcc_ovrw').text('<?php _e( 'Overwrite in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action']");
 				$('<option>').val('wpqtcc_ovrw').text('<?php _e( 'Overwrite in all languages', 'wpqtcc' ); ?>').appendTo("select[name='action2']");
 
+				$('<option>').val('wpqtcc_dupe_noen').text('<?php _e( 'Copy in all languages except English', 'wpqtcc' ); ?>').appendTo("select[name='action']");
+				$('<option>').val('wpqtcc_dupe_noen').text('<?php _e( 'Copy in all languages except English', 'wpqtcc' ); ?>').appendTo("select[name='action2']");
+
+				$('<option>').val('wpqtcc_ovrw_noen').text('<?php _e( 'Overwrite in all languages except English', 'wpqtcc' ); ?>').appendTo("select[name='action']");
+				$('<option>').val('wpqtcc_ovrw_noen').text('<?php _e( 'Overwrite in all languages except English', 'wpqtcc' ); ?>').appendTo("select[name='action2']");
+				
+				
 				//$('<option>').val('test').text('<?php echo 'lang: ' . get_locale(); ?>').appendTo("select[name='action']");
 			});
 		})( jQuery );
@@ -68,10 +75,20 @@ class wpqTCC {
 		
 		$action = false;
 		
-		if( 'wpqtcc_dupe' == $_REQUEST['action'] || 'wpqtcc_dupe' == $_REQUEST['action2'] )
+		if( 
+			'wpqtcc_dupe' == $_REQUEST['action'] || 
+			'wpqtcc_dupe' == $_REQUEST['action2'] ||
+			'wpqtcc_dupe_noen' == $_REQUEST['action'] ||
+			'wpqtcc_dupe_noen' == $_REQUEST['action2']
+		)
 			$action = 'copy';
 		
-		if( 'wpqtcc_ovrw' == $_REQUEST['action'] || 'wpqtcc_ovrw' == $_REQUEST['action2'] )
+		if( 
+			'wpqtcc_ovrw' == $_REQUEST['action'] || 
+			'wpqtcc_ovrw' == $_REQUEST['action2'] ||
+			'wpqtcc_ovrw_noen' == $_REQUEST['action'] ||
+			'wpqtcc_ovrw_noen' == $_REQUEST['action2']
+		)
 			$action = 'overwrite';
 		
 		if( !$action )
@@ -107,6 +124,14 @@ class wpqTCC {
 				
 			foreach( $langs as $lang ) {
 				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
+
+					if( 
+						'en' == $lang && (
+							preg_match( '/_noen$/', $_REQUEST['action'] ) ||
+							preg_match( '/_noen$/', $_REQUEST['action2'] )
+						)
+					)
+						continue;
 
 					if( 'copy' == $action ) {
 						//echo $lang . ' already there.<br/>';
