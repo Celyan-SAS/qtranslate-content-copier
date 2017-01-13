@@ -123,15 +123,16 @@ class wpqTCC {
 			}
 				
 			foreach( $langs as $lang ) {
-				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
 
-					if( 
+				if(
 						'en' == $lang && (
-							preg_match( '/_noen$/', $_REQUEST['action'] ) ||
-							preg_match( '/_noen$/', $_REQUEST['action2'] )
+								preg_match( '/_noen$/', $_REQUEST['action'] ) ||
+								preg_match( '/_noen$/', $_REQUEST['action2'] )
 						)
-					)
-						continue;
+				)
+					continue;
+
+				if( preg_match( '/\[:' . $lang . '\]/', $content ) ) {
 
 					if( 'copy' == $action ) {
 						//echo $lang . ' already there.<br/>';
