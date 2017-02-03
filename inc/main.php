@@ -115,6 +115,9 @@ class wpqTCC {
 			//echo '<li>Post id: ' . $post_id . '</li>';	//debug
 			
 			$post = get_post( $post_id );
+			
+			/** CONTENT **/
+			
 			$orig_content = $content = $post->post_content;
 			
 			if( !preg_match( '/\[\:([a-z]{2})?\]/', $content ) ) {
@@ -125,10 +128,10 @@ class wpqTCC {
 			foreach( $langs as $lang ) {
 
 				if(
-						'en' == $lang && (
-								preg_match( '/_noen$/', $_REQUEST['action'] ) ||
-								preg_match( '/_noen$/', $_REQUEST['action2'] )
-						)
+					'en' == $lang && (
+						preg_match( '/_noen$/', $_REQUEST['action'] ) ||
+						preg_match( '/_noen$/', $_REQUEST['action2'] )
+					)
 				)
 					continue;
 
@@ -175,9 +178,77 @@ class wpqTCC {
 				
 			}
 			
-			if( $content && $orig_content != $content ) {
+			/** TITLE **/
+			
+			$orig_title = $title = $post->post_title;
+				
+			if( !preg_match( '/\[\:([a-z]{2})?\]/', $title ) ) {
+				//echo 'Les langues ne sont pas définies.</br>';
+				$title = '[:fr]' . $title . '[:]';
+			}
+			
+			foreach( $langs as $lang ) {
+			
+				if(
+					'en' == $lang && (
+						preg_match( '/_noen$/', $_REQUEST['action'] ) ||
+						preg_match( '/_noen$/', $_REQUEST['action2'] )
+					)
+				)
+					continue;
+			
+				if( preg_match( '/\[:' . $lang . '\]/', $title ) ) {
+			
+					if( 'copy' == $action ) {
+						//echo $lang . ' already there.<br/>';
+						continue;
+					} elseif( 'fr' != $lang ) {
+						/** Overwrite **/
+						$title = preg_replace( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/ms', '\\2', $title );
+			
+						/*DEBUG:
+						 preg_match( '/\[:' . $lang . '\](.*?)(\[\:([a-z]{2})?\])/ms', $title, $matches );
+						echo 'lang:' . $lang . "\n";
+						var_dump( $matches );
+						exit;
+						*/
+					} else {
+						/* fr */
+						continue;
+					}
+				}
+				//echo $lang . ' to copy.<br/>';
+			
+				if( false === strpos( $title, '[:fr]' ) ) {
+					echo 'Erreur sur post id: ' . $post_id . '<brt/>';
+					echo 'Il n\'y a pas le titre français.<br/>';
+					$error = true;
+					continue;
+				}
+			
+				$stripped = $title;
+				if( preg_match( '/\[\:fr\](.+?)\[\:([a-z]{2})?\]/ms', $title, $matches ) ) {
+					$stripped = $matches[1];
+					//echo 'stripped ok.<br/>';
+					$title = str_replace( '[:]', '[:' . $lang . ']' . $stripped . '[:]', $title );
+				} else {
+					echo 'Erreur sur post id: ' . $post_id . '<brt/>';
+					echo 'Le titre n\'a pas pu être extrait.<br/>';
+					$error = true;
+					continue;
+				}
+			
+			}
+				
+			/** UPDATE **/
+			
+			if( 
+				( $content && ( $orig_content != $content ) ) ||
+				( $title && ( $orig_title != $title ) )
+			) {
 				//echo 'updating post<br/>';
 				$post->post_content = $content;
+				$post->post_title = $title;
 				wp_update_post( $post );
 			}
 		}
